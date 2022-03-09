@@ -1,0 +1,59 @@
+﻿@model WebUI.Models.Employee
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container p-3 my-3 border">
+    <h1> @ViewBag.PageName</h1>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <hr />
+            <form asp-action="AddOrEdit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @if (@ViewBag.IsEditEmp)
+                {
+                    <input type="hidden" asp-for="EmployeeId" />
+                }
+                <div class="form-group">
+                    <label class="control-label">First Name</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Last Name</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <input asp-for="EmailId" class="form-control" />
+                    <span asp-validation-for="EmailId" class="text-danger"></span>
+                </div>
+                <div>
+                    <label class="control-label">Department</label>
+                    <select id="drpEmpList" class="form-control" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "DepartmentId", "DepartmentName"))">
+                        <option value="0">--Select--</option>
+                    </select>
+                    <input type="hidden" asp-for="DepartmentId" />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Reporting to</label>
+                    <input asp-for="ManagerId" class="form-control" />
+                    @*<span asp-validation-for="ManagerId" class="text-danger"></span>*@
+                </div>
+
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                    <a class="btn btn-danger" asp-action="Index">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

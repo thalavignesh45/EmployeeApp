@@ -1,0 +1,47 @@
+﻿
+@model IEnumerable<WebUI.Models.Department>
+
+
+@{
+    ViewData["Title"] = "Department";
+}
+<h2>Index</h2>
+<p>
+    <a asp-action="AddOrEditDep">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Department Id
+            </th>
+           
+            <th>
+                Department
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                    </td>
+                  
+                    <td>
+                        <a asp-action="AddOrEditDep" asp-route-id="@item.DepartmentId">Edit</a>
+                    </td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,113 @@
+﻿@model Tuple<WebUI.Models.Employee, IEnumerable<WebUI.Models.Employee>>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Employee Form</h4>
+
+
+<div class="container p-3 my-3 border">
+   
+            <form method="post" asp-controller="Home" asp-action="Search">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label">Employee Id</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" name="EmployeeId" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">First Name</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" name="FirstName" />
+                        </div>
+                  
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label class="control-label">Last Name</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" name="LastName" />
+                        </div>
+                        <div class="col-sm-2">
+                            <label class="control-label">Department</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" name="Department" />
+                        </div>
+                        <input type="submit" value="Search" />
+                    </div>
+
+                </div>
+           
+    </form>
+      
+</div>
+<p style="text-align:right;margin-right:20px;">
+    <a class="btn btn-outline-primary" asp-action="AddOrEdit">Create New</a>
+</p>
+<div class="table-responsive">
+
+    <br />
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Employee Id
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Last Name
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Email Id
+                </th>
+                <th></th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Item2)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailId)
+                    </td>
+                    <td>
+                    <td class="text-center">
+                        <a asp-action="AddOrEdit" class="btn btn-outline-primary" asp-route-employeeId="@item.EmployeeId">Edit</a>
+                    </td>
+
+                    <td class="text-center">
+                        <a asp-action="Delete" class="btn btn-outline-danger" asp-route-employeeId="@item.EmployeeId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
